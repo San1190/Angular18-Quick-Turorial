@@ -1,0 +1,433 @@
+/* ===== ESTILOS FUTURISTAS PARA VIDEOJUEGOS ===== */
+
+/* Variables CSS para colores neón */
+:root {
+  --neon-blue: #00ffff;
+  --neon-purple: #ff00ff;
+  --neon-green: #00ff41;
+  --neon-orange: #ff6b35;
+  --neon-red: #ff0040;
+  --dark-bg: #0a0a0a;
+  --darker-bg: #050505;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos base del contenedor */
+.videojuegos {
+  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de partículas de fondo */
+.videojuegos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 20% 80%, var(--neon-blue) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, var(--neon-purple) 1px, transparent 1px),
+    radial-gradient(circle at 40% 40%, var(--neon-green) 1px, transparent 1px);
+  background-size: 50px 50px, 30px 30px, 70px 70px;
+  animation: particleFloat 20s linear infinite;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* Contenido principal */
+.videojuegos > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Título principal con efecto neón */
+.videojuegos h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: neonGlow 3s ease-in-out infinite alternate, gradientShift 4s ease infinite;
+  text-shadow:
+    0 0 10px var(--neon-blue),
+    0 0 20px var(--neon-blue),
+    0 0 30px var(--neon-blue);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@keyframes neonGlow {
+  0% { filter: brightness(1) drop-shadow(0 0 5px var(--neon-blue)); }
+  100% { filter: brightness(1.5) drop-shadow(0 0 20px var(--neon-blue)); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Lista de videojuegos */
+.videojuegos ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  gap: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Elementos de la lista con efecto glassmorphism */
+.videojuegos li {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: slideInFromLeft 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.videojuegos li:nth-child(1) { animation-delay: 0.1s; }
+.videojuegos li:nth-child(2) { animation-delay: 0.2s; }
+.videojuegos li:nth-child(3) { animation-delay: 0.3s; }
+.videojuegos li:nth-child(4) { animation-delay: 0.4s; }
+.videojuegos li:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Efecto hover en elementos de la lista */
+.videojuegos li:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow:
+    0 10px 30px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(255, 0, 255, 0.2),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+  border-color: var(--neon-green);
+  background: linear-gradient(135deg,
+    rgba(0, 255, 255, 0.2),
+    rgba(255, 0, 255, 0.2),
+    rgba(0, 255, 65, 0.2));
+}
+
+/* Efecto de brillo en hover */
+.videojuegos li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.videojuegos li:hover::before {
+  left: 100%;
+}
+
+/* Botón de eliminar */
+.videojuegos .remove-btn {
+  background: linear-gradient(45deg, var(--neon-red), #ff6b6b);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 0, 64, 0.3);
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.videojuegos li:hover .remove-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.videojuegos .remove-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(255, 0, 64, 0.6);
+  background: linear-gradient(45deg, #ff0040, #ff6b6b);
+}
+
+/* Mensaje cuando no hay videojuegos */
+.videojuegos li:only-child {
+  background: linear-gradient(135deg,
+    rgba(255, 107, 53, 0.2),
+    rgba(255, 0, 255, 0.2));
+  border-color: var(--neon-orange);
+  animation: pulseWarning 2s ease-in-out infinite;
+  justify-content: center;
+}
+
+@keyframes pulseWarning {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+    transform: scale(1.02);
+  }
+}
+
+/* Sección de nuevo juego */
+.videojuegos h4 {
+  font-size: 1.5rem;
+  color: var(--neon-green);
+  text-align: center;
+  margin: 2rem 0 1rem;
+  text-shadow: 0 0 10px var(--neon-green);
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% { text-shadow: 0 0 10px var(--neon-green); }
+  100% { text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-green); }
+}
+
+/* Contenedor de input y botón */
+.videojuegos .input-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Input con estilo futurista */
+.videojuegos input {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--glass-border);
+  border-radius: 25px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  color: white;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  min-width: 300px;
+  outline: none;
+  position: relative;
+}
+
+.videojuegos input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.videojuegos input:focus {
+  border-color: var(--neon-blue);
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.videojuegos input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Botón con efectos espectaculares */
+.videojuegos button {
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow:
+    0 5px 15px rgba(0, 255, 255, 0.3),
+    0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.videojuegos button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.videojuegos button:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 10px 25px rgba(0, 255, 255, 0.5),
+    0 0 20px rgba(255, 0, 255, 0.4),
+    0 0 30px rgba(0, 255, 65, 0.3);
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+}
+
+.videojuegos button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.videojuegos button:active:not(:disabled) {
+  transform: translateY(0) scale(0.95);
+  box-shadow:
+    0 2px 10px rgba(0, 255, 255, 0.3),
+    0 0 5px rgba(255, 0, 255, 0.2);
+}
+
+.videojuegos button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Efecto de partículas en el botón */
+.videojuegos button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.videojuegos button:active:not(:disabled)::after {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .videojuegos {
+    padding: 1rem;
+  }
+
+  .videojuegos h2 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .videojuegos .input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .videojuegos input {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .videojuegos button {
+    width: 100%;
+  }
+
+  .videojuegos li {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .videojuegos .remove-btn {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Efectos adicionales para elementos dinámicos */
+.videojuegos li.adding {
+  animation: addItem 0.6s ease-out;
+}
+
+@keyframes addItem {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Efecto de carga */
+.videojuegos.loading {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Scrollbar personalizada */
+.videojuegos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.videojuegos::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+.videojuegos::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--neon-blue), var(--neon-purple));
+  border-radius: 4px;
+}
+
+.videojuegos::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--neon-green), var(--neon-orange));
+}

@@ -1,0 +1,29 @@
+<hr>
+<div class="videojuegos" [class.loading]="isLoading">
+  <h2>Listado de videojuegos</h2>
+  <ul>
+    @for (juego of videojuegos; track juego; let i = $index){
+      <li>
+        <span>{{juego}}</span>
+        <button class="remove-btn" (click)="removeJuego(i)">×</button>
+      </li>
+    } @empty {
+      <li>No hay videojuegos para mostrar</li>
+    }
+  </ul>
+
+  <h4>{{nuevoJuego}}</h4>
+
+  <div class="input-container">
+    <input
+      [(ngModel)]="nuevoJuego"
+      type="text"
+      placeholder="agrega un nuevo videojuego"
+      (keypress)="onKeyPress($event)"
+      [disabled]="isLoading"
+    />
+    <button (click)="addJuego()" [disabled]="isLoading">
+      {{ isLoading ? 'Añadiendo...' : 'Añadir' }}
+    </button>
+  </div>
+</div>

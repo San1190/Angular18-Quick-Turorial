@@ -1,0 +1,684 @@
+/* ===== ESTILOS FUTURISTAS PARA EL COMPONENTE APP ===== */
+
+/* Contenedor principal de la aplicación */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--darkest-bg) 0%, var(--dark-bg) 50%, var(--darker-bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de partículas específicas para la app */
+:host::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 15% 25%, var(--neon-blue) 2px, transparent 2px),
+    radial-gradient(circle at 85% 75%, var(--neon-purple) 1px, transparent 1px),
+    radial-gradient(circle at 45% 55%, var(--neon-green) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 75% 25%, var(--neon-orange) 1px, transparent 1px),
+    radial-gradient(circle at 25% 85%, var(--neon-pink) 1px, transparent 1px);
+  background-size: 150px 150px, 100px 100px, 120px 120px, 80px 80px, 90px 90px;
+  animation: appParticleFloat 25s linear infinite;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes appParticleFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg) scale(1.05);
+  }
+  66% {
+    transform: translateY(-60px) rotate(240deg) scale(0.95);
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg) scale(1);
+  }
+}
+
+/* Efecto de líneas de energía para la app */
+:host::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(45deg, transparent 49%, var(--neon-blue) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, var(--neon-purple) 50%, transparent 51%);
+  background-size: 300px 300px;
+  animation: appEnergyGrid 15s linear infinite;
+  opacity: 0.03;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes appEnergyGrid {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(300px, 300px) rotate(360deg); }
+}
+
+/* Contenido principal de la app */
+:host > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Contenedor principal de la aplicación */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header de la aplicación */
+.app-header {
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  animation: headerEntrance 1.2s ease-out forwards;
+}
+
+@keyframes headerEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título principal */
+.main-title {
+  font-size: 4rem;
+  font-weight: 900;
+  background: var(--gradient-primary);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: neonGlow 3s ease-in-out infinite alternate, gradientShift 4s ease infinite;
+  text-shadow:
+    0 0 10px var(--neon-blue),
+    0 0 20px var(--neon-blue),
+    0 0 30px var(--neon-blue);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+}
+
+.title-glow {
+  animation: titlePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 10px var(--neon-blue));
+  }
+  100% {
+    filter: brightness(1.4) drop-shadow(0 0 25px var(--neon-blue));
+  }
+}
+
+/* Contenido principal */
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Sección de descripción */
+.description-section {
+  max-width: 900px;
+  width: 100%;
+  animation: descriptionEntrance 1.5s ease-out 0.3s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.description-text {
+  text-align: center;
+  padding: 2.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 2px solid var(--glass-border);
+  border-radius: 20px;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.description-text::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-primary);
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.description-text:hover::before {
+  opacity: 1;
+}
+
+.description-text:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 15px 40px rgba(0, 255, 255, 0.3),
+    0 0 30px rgba(255, 0, 255, 0.2);
+}
+
+@keyframes descriptionEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Elementos destacados en la descripción */
+.highlight {
+  color: var(--neon-green);
+  text-shadow: 0 0 15px var(--neon-green);
+  font-weight: 700;
+  animation: highlightGlow 2s ease-in-out infinite alternate;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  background: rgba(0, 255, 65, 0.1);
+}
+
+@keyframes highlightGlow {
+  0% {
+    text-shadow: 0 0 15px var(--neon-green);
+  }
+  100% {
+    text-shadow: 0 0 25px var(--neon-green), 0 0 35px var(--neon-green);
+  }
+}
+
+/* Separador visual */
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem 0;
+  animation: separatorEntrance 1s ease-out 0.6s forwards;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.separator-line {
+  flex: 1;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+  animation: lineGlow 2s ease-in-out infinite alternate;
+}
+
+.separator-icon {
+  font-size: 2rem;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 20px var(--neon-yellow);
+  animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes separatorEntrance {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lineGlow {
+  0% {
+    box-shadow: 0 0 10px var(--neon-blue);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+/* Sección de videojuegos */
+.videojuegos-section {
+  width: 100%;
+  max-width: 1200px;
+  animation: videojuegosEntrance 1.8s ease-out 0.9s forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@keyframes videojuegosEntrance {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Footer de la aplicación */
+.app-footer {
+  padding: 2rem;
+  text-align: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--glass-border);
+  margin-top: auto;
+  animation: footerEntrance 1s ease-out 1.2s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+}
+
+@keyframes footerEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el título principal */
+h1 {
+  text-align: center;
+  margin: 2rem 0 3rem;
+  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 2px solid var(--glass-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: titleEntrance 1s ease-out forwards;
+}
+
+/* Efecto de brillo en el título */
+h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.8s;
+}
+
+h1:hover::before {
+  left: 100%;
+}
+
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+  }
+  50% {
+    transform: translateY(10px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Estilos para el párrafo de descripción */
+p {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  position: relative;
+  animation: descriptionEntrance 1.2s ease-out 0.3s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Efecto de borde neón en el párrafo */
+p::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-primary);
+  border-radius: 17px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+p:hover::before {
+  opacity: 1;
+}
+
+@keyframes descriptionEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el componente de videojuegos */
+app-videojuegos {
+  display: block;
+  margin: 3rem auto;
+  max-width: 1200px;
+  animation: componentEntrance 1.5s ease-out 0.6s forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@keyframes componentEntrance {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Estilos para el router-outlet */
+router-outlet {
+  display: block;
+  margin-top: 2rem;
+  animation: routerEntrance 0.8s ease-out;
+}
+
+@keyframes routerEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efectos de hover para elementos interactivos */
+h1:hover, p:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 30px rgba(0, 255, 255, 0.2),
+    0 0 20px rgba(255, 0, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efectos de partículas en hover */
+h1:hover::after, p:hover::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--neon-blue), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: particleExplosion 0.6s ease-out;
+}
+
+@keyframes particleExplosion {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* Estilos para elementos con datos dinámicos */
+h1 span, p span {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green);
+  font-weight: 700;
+  animation: dataGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes dataGlow {
+  0% {
+    text-shadow: 0 0 10px var(--neon-green);
+  }
+  100% {
+    text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+  }
+}
+
+/* Efectos de carga para la aplicación */
+:host.loading {
+  animation: appLoading 2s ease-in-out infinite;
+}
+
+@keyframes appLoading {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+/* Estilos para mensajes de estado */
+.status-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  z-index: 1000;
+  animation: statusSlideIn 0.5s ease-out;
+}
+
+@keyframes statusSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Efectos de scroll personalizados */
+:host {
+  scroll-behavior: smooth;
+}
+
+/* Estilos para elementos de navegación */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 100;
+  padding: 1rem 2rem;
+  animation: navSlideDown 0.8s ease-out;
+}
+
+@keyframes navSlideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design para la app */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .description-text {
+    font-size: 1rem;
+    padding: 1.5rem;
+  }
+
+  .separator {
+    gap: 1rem;
+  }
+
+  .separator-icon {
+    font-size: 1.5rem;
+  }
+
+  :host::before {
+    background-size: 100px 100px, 70px 70px, 80px 80px, 60px 60px, 70px 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .description-text {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+
+  .app-header {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  :host::before {
+    background-size: 80px 80px, 60px 60px, 70px 70px, 50px 50px, 60px 60px;
+  }
+}
+
+/* Efectos de transición para cambios de estado */
+:host {
+  transition: all 0.3s ease;
+}
+
+/* Estilos para elementos de error */
+.error {
+  background: var(--gradient-danger);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Estilos para elementos de éxito */
+.success {
+  background: var(--gradient-secondary);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  animation: successBounce 0.5s ease-in-out;
+}
+
+@keyframes successBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Efectos de cursor personalizados */
+:host {
+  cursor: default;
+}
+
+h1, p, button, input {
+  cursor: pointer;
+}
+
+/* Estilos para elementos de carga */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--glass-border);
+  border-radius: 50%;
+  border-top-color: var(--neon-blue);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
