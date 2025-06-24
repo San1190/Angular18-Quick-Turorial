@@ -11,6 +11,6 @@ import { Videojuegos } from './components/videojuegos/videojuegos';
 export class App {
   protected nombre = 'Prueba de angular 18';
   protected descripcion = 'esto es una clase rapida de repaso de angular moderno';
-  protected profesor= 'San1190 ;)';
+  protected creador = 'San1190 ;)';
 
 }
