@@ -1,7 +1,6 @@
 [build]
-  publish = "dist/angular-15-minutos"
+  publish = "dist/Angular18-Quick-Tutorial"
   command = "npm run build"
-
 [build.environment]
   NODE_VERSION = "20"
 
